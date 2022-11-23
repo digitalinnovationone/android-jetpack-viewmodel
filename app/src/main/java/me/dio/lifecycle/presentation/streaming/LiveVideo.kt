@@ -1,4 +1,4 @@
-package me.dio.lifecycle.streaming
+package me.dio.lifecycle.presentation.streaming
 
 import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver

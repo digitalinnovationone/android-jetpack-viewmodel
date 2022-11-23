@@ -1,4 +1,4 @@
-package me.dio.lifecycle.streaming
+package me.dio.lifecycle.presentation.streaming
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
