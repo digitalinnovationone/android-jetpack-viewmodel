@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".viewmodel.FirstFragment">
 
-    <TextView
-        android:id="@+id/textview_first"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edittext_increment_by"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/hello_first_fragment"
+        android:hint="@string/increment_by"
+        android:inputType="number"
+        android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@id/button_first"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,5 +26,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_first" />
+        app:layout_constraintTop_toBottomOf="@id/edittext_increment_by" />
 </androidx.constraintlayout.widget.ConstraintLayout>
