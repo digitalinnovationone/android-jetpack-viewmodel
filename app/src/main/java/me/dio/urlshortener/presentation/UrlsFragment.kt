@@ -1,10 +1,12 @@
-package me.dio.urlshortener
+package me.dio.urlshortener.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +23,10 @@ class UrlsFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val viewModel: UrlsViewModel by viewModels {
+        ViewModelFactory()
+    }
+
     private val urlsAdapter = UrlsAdapter()
 
     override fun onCreateView(
@@ -34,6 +40,7 @@ class UrlsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rvShortenedUrls.bind()
+        viewModel.state.observe(viewLifecycleOwner, ::handleState)
     }
 
     override fun onDestroyView() {
@@ -46,18 +53,12 @@ class UrlsFragment : Fragment() {
         val divider = DividerItemDecoration(context, linearLayoutManager.orientation)
         addItemDecoration(divider)
         adapter = urlsAdapter
-        urlsAdapter.submitList(getUrls())
     }
 
-    private fun getUrls() = listOf(
-        ShortenedUrl("https://www.dio.me/", "https://hideuri.com/yQJA11"),
-        ShortenedUrl("https://github.com/digitalinnovationone", "https://hideuri.com/2y657Z"),
-        ShortenedUrl(
-            "https://br.linkedin.com/school/digitalinnovation-one/",
-            "https://hideuri.com/mGZ08N"
-        ),
-        ShortenedUrl("https://www.instagram.com/dio_makethechange/", "https://hideuri.com/Dd4g3X"),
-        ShortenedUrl("https://twitter.com/dio_me_", "https://hideuri.com/nOZ62Y"),
-        ShortenedUrl("https://pt-br.facebook.com/diomakethechange/", "https://hideuri.com/v0ZyX1"),
-    )
+    private fun handleState(state: UrlsState) = binding.run {
+        urlsAdapter.submitList(state.urls)
+        progress.isVisible = state.isProgressVisible
+        tvErrorMessage.text = state.errorMessage
+        tvErrorMessage.isVisible = state.isErrorMessageVisible
+    }
 }
