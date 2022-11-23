@@ -1,12 +1,28 @@
 package me.dio.lifecycle
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
-    var counter = 0
-        private set
+    private val _counter = NumberLiveData()
+    val counter: LiveData<Int> = _counter
 
     fun increment() {
-        counter++
+        val number = _counter.value ?: 0
+        _counter.value = number + 1
+    }
+}
+
+class NumberLiveData(initial: Int = 0) : MutableLiveData<Int>(initial) {
+    override fun onActive() {
+        super.onActive()
+        Log.d("MainViewModel", "onActive")
+    }
+
+    override fun onInactive() {
+        super.onInactive()
+        Log.d("MainViewModel", "onInactive")
     }
 }
