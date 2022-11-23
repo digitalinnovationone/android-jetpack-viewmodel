@@ -6,6 +6,52 @@
     android:layout_height="match_parent"
     tools:context="me.dio.urlshortener.presentation.UrlsFragment">
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_url"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_2x"
+        android:layout_marginTop="@dimen/spacing_3x"
+        android:layout_marginEnd="@dimen/spacing_1x"
+        android:hint="@string/label_url"
+        app:layout_constraintEnd_toStartOf="@id/btn_shorten_url"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionSend"
+            android:inputType="textUri" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_sending"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_2x"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/til_url"
+        app:layout_constraintEnd_toEndOf="@id/til_url"
+        app:layout_constraintTop_toTopOf="@id/til_url"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_shorten_url"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/spacing_1x"
+        android:background="?selectableItemBackgroundBorderless"
+        android:paddingHorizontal="@dimen/spacing_1x"
+        android:src="@drawable/ic_send"
+        android:tint="?colorAccent"
+        app:layout_constraintBottom_toBottomOf="@id/til_url"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/til_url" />
+
     <TextView
         android:id="@+id/tv_list_title"
         style="@style/TextAppearance.MaterialComponents.Headline6"
@@ -16,7 +62,7 @@
         android:text="@string/title_shortened_urls"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/til_url" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_shortened_urls"
@@ -35,17 +81,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tv_list_title" />
 
     <TextView
         android:id="@+id/tv_error_message"
-        style="@style/TextAppearance.MaterialComponents.Headline4"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_list_title"
         tools:text="Error" />
 </androidx.constraintlayout.widget.ConstraintLayout>

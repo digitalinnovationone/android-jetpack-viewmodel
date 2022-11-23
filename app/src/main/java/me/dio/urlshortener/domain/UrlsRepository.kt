@@ -1,5 +1,8 @@
 package me.dio.urlshortener.domain
 
+import kotlinx.coroutines.flow.Flow
+
 interface UrlsRepository {
-    suspend fun getAll(): List<ShortenedUrl>
+    fun getAll(): Flow<List<ShortenedUrl>>
+    suspend fun shorten(url: String)
 }

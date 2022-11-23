@@ -19,4 +19,8 @@ sealed interface UrlsState {
     }
 
     data class Failed(override val errorMessage: String) : UrlsState
+
+    object Empty : UrlsState {
+        override val errorMessage = "Nenhuma URL encontrada"
+    }
 }
